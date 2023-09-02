@@ -1,5 +1,5 @@
-const data = require("../../models/contacts");
-const contactSchema = require("../../schemas/contact");
+const { Contact } = require("../../models");
+const { contactSchema } = require("../../schemas");
 
 const add = async (req, res, next) => {
   try {
@@ -8,7 +8,7 @@ const add = async (req, res, next) => {
       res.status(400).send("Error");
       return;
     }
-    const newContact = await data.addContact(req.body);
+    const newContact = await Contact.create(req.body);
     res.status(201).json(newContact);
   } catch (error) {
     next(error);

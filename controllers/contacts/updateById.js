@@ -1,5 +1,5 @@
-const data = require("../../models/contacts");
-const contactSchema = require("../../schemas/contact");
+const { Contact } = require("../../models");
+const { contactSchema } = require("../../schemas");
 
 const updateById = async (req, res, next) => {
   try {
@@ -9,7 +9,7 @@ const updateById = async (req, res, next) => {
       return;
     }
     const { contactId } = req.params;
-    const updatedContact = await data.updateContact(contactId, req.body);
+    const updatedContact = await Contact.findByIdAndUpdate(contactId, req.body);
     if (!updatedContact) {
       res.status(404).send("Not Found");
       return;
